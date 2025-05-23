@@ -5,8 +5,18 @@ async function chatWithLLM(prompt: string): Promise<{ message: string }> {
     try {
         const res = await axios.post("/api/chat/", { prompt });
         return res.data;
-    } catch (err: any) {
-        const errorMsg = err?.response?.data?.error || err?.message || "Unknown error";
+    } catch {
+        const errorMsg = "Unknown error";
+        throw new Error(errorMsg);
+    }
+}
+
+async function generateMindMapData(prompt: string) {
+    try {
+        const res = await axios.post("/api/mindmap/", { prompt });
+        return res.data;
+    } catch {
+        const errorMsg = "Unknown error";
         throw new Error(errorMsg);
     }
 }
@@ -16,7 +26,12 @@ export function useGenerate() {
         mutationFn: chatWithLLM,
     });
 
+    const mindMap = useMutation({
+        mutationFn: generateMindMapData,
+    });
+
     return {
         chat,
+        mindMap,
     };
 }

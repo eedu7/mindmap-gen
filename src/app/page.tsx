@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { BotIcon, User2Icon } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Poppins } from "next/font/google";
+import Link from "next/link";
 
 const poppins = Poppins({
     weight: ["700"],
@@ -102,24 +103,36 @@ export default function Home() {
                 )}
 
                 <form
-                    className="flex items-center gap-x-2 rounded-lg border px-2 shadow-xl"
+                    className="mx-auto flex max-w-xl flex-col items-center gap-x-2 rounded-lg border p-2 shadow-xl"
                     onSubmit={(e) => onSubmit(e)}
                 >
-                    <input
-                        onChange={(e) => setPrompt(e.target.value)}
-                        className="w-full border-none px-4 py-4 shadow-none outline-none focus:border-none focus:outline-none active:border-none active:outline-none"
-                        placeholder="Ask anything..."
-                        value={prompt}
-                        disabled={chat.isPending}
-                    />
-                    <Button
-                        variant="outline"
-                        className="cursor-pointer"
-                        type="submit"
-                        disabled={chat.isPending}
-                    >
-                        Send
-                    </Button>
+                    <div className="flex w-full items-center">
+                        <input
+                            onChange={(e) => setPrompt(e.target.value)}
+                            className="w-full flex-1 border-none px-4 py-4 shadow-none outline-none focus:border-none focus:outline-none active:border-none active:outline-none"
+                            placeholder="Ask anything..."
+                            value={prompt}
+                            disabled={chat.isPending}
+                        />
+                        <Button
+                            variant="outline"
+                            className="cursor-pointer"
+                            type="submit"
+                            disabled={chat.isPending}
+                        >
+                            Send
+                        </Button>
+                    </div>
+                    <div className="flex-start flex w-full">
+                        <Link href="/mind-map">
+                            <Button
+                                variant="outline"
+                                className="cursor-pointer"
+                            >
+                                Generate Mindmap
+                            </Button>
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>

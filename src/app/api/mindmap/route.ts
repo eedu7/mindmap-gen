@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { chat } from "@/lib/gemini";
+import { getMindMap } from "@/lib/gemini";
 
 export async function POST(req: NextRequest) {
     try {
@@ -17,11 +17,8 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const result = await chat(prompt);
-
-        return NextResponse.json({
-            message: result,
-        });
+        const result = await getMindMap(prompt);
+        return NextResponse.json(result);
     } catch {
         return NextResponse.json(
             {
